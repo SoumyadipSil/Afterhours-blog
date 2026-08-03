@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Blog + AI Assistant
 
-## Getting Started
+A personal blog with **Life** and **Coding** posts, owner-only writing, visitor reactions and moderated comments, and a visitor-facing AI assistant with RAG over published content.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, TypeScript)
+- **Tailwind CSS**
+- **Supabase** (PostgreSQL, Auth, Storage, pgvector)
+- **NextAuth.js**
+- **OpenRouter / Anthropic** + embeddings for the assistant
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in values as you add features
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Route structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  (public)/          # visitor-facing pages
+    page.tsx         # home
+    blog/            # list + [slug]
+    about/
+  (admin)/           # owner only (auth in step 4)
+    dashboard/
+    write/           # create + [id] edit
+  api/               # added in later steps
+```
 
-## Learn More
+## Build order
 
-To learn more about Next.js, take a look at the following resources:
+1. Scaffold (this step)
+2. Database (Supabase schema)
+3. Public read pages
+4. Owner auth + write flow
+5. Reactions
+6. Comments + moderation
+7. AI assistant (phase 1 — chat UI)
+8. AI assistant (phase 2 — RAG)
+9. Design pass
+10. SEO + polish
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Push to GitHub and connect the repo in [Vercel](https://vercel.com/new). No env vars are required until step 2 (Supabase).
