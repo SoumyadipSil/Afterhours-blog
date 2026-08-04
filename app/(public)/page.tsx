@@ -5,7 +5,7 @@ export default function HomePage() {
     <main className="mx-auto max-w-5xl px-6 py-24">
       <div className="max-w-2xl">
         <p className="mb-4 text-sm font-medium uppercase tracking-widest text-amber-600 dark:text-amber-500">
-          Personal blog + AI assistant
+          AfterHours by Soumyadip
         </p>
         <h1 className="mb-6 text-4xl font-semibold leading-tight tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl">
           Life reflections &amp; coding projects

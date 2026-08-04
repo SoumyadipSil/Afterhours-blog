@@ -14,13 +14,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Personal Blog",
-    template: "%s · Personal Blog",
+    default: "AfterHours by Soumyadip",
+    template: "%s · AfterHours",
   },
   description:
-    "Life reflections, coding projects, and an AI assistant to guide you through the site.",
+    "Late-night life reflections and coding projects by Soumyadip — with an AI guide through the site.",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{

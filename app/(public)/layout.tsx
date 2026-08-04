@@ -13,7 +13,7 @@ export default function PublicLayout({
             href="/"
             className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50"
           >
-            Personal Blog
+            AfterHours
           </Link>
           <div className="flex items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400">
             <Link href="/blog" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-50">
@@ -27,7 +27,7 @@ export default function PublicLayout({
       </header>
       <div className="flex-1">{children}</div>
       <footer className="border-t border-zinc-200/80 py-8 text-center text-sm text-zinc-500 dark:border-zinc-800">
-        Built with Next.js · Coming soon
+        AfterHours by Soumyadip
       </footer>
     </>
   );
