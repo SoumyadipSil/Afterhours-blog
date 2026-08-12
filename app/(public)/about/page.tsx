@@ -1,13 +1,68 @@
+import ScrollReveal from '@/app/components/ScrollReveal';
+
 export default function AboutPage() {
+  const interests = [
+    "Software Engineering", "Late Night Coding", "Cinematic Photography",
+    "UI/UX Design", "Creative Writing", "AI Experiments",
+    "Minimalism", "Mechanical Keyboards"
+  ];
+
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="mb-6 text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-        About
-      </h1>
-      <p className="leading-relaxed text-zinc-600 dark:text-zinc-400">
-        A short bio will live here — used by the AI assistant and visitors who want
-        to know who runs this site. Fill this in during the design pass or sooner.
-      </p>
+    <main className="min-h-screen pb-24">
+      <section className="pt-32 pb-16 px-6 border-b border-border">
+        <div className="max-w-4xl mx-auto text-center">
+          <ScrollReveal delay={0}>
+            <h1 className="font-heading text-5xl md:text-7xl text-text-primary mb-6">About</h1>
+            <p className="text-text-secondary text-lg max-w-2xl mx-auto">
+              The person behind the late night commits and midnight reflections.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <ScrollReveal delay={100}>
+            <div className="prose prose-invert prose-amber max-w-none prose-headings:font-heading">
+              <h2 className="text-3xl text-text-primary mb-6">Hello, I'm Soumyadip</h2>
+              <p className="text-text-secondary leading-relaxed mb-6">
+                I'm a software engineer and designer who finds the most clarity after the sun goes down. 
+                AfterHours is my digital garden — a space where I document the things I build, 
+                the thoughts that keep me awake, and the aesthetics that inspire me.
+              </p>
+              <p className="text-text-secondary leading-relaxed mb-8">
+                By day, I work on complex systems and user interfaces. By night, I experiment with new frameworks,
+                write personal essays, and curate this corner of the internet. The goal isn't just to share code, 
+                but to share the human experience behind the screen.
+              </p>
+
+              <h3 className="text-xl text-text-primary mb-4 font-heading">Interests & Focus</h3>
+              <div className="flex flex-wrap gap-2">
+                {interests.map((interest) => (
+                  <span 
+                    key={interest} 
+                    className="px-3 py-1.5 rounded-full bg-accent-amber/10 border border-accent-amber/20 text-accent-amber text-sm"
+                  >
+                    {interest}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={300}>
+            <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border border-border group">
+              <img 
+                src="https://i.pinimg.com/736x/dc/e5/5f/dce55f226a6bfba9acd7c6718e056495.jpg" 
+                alt="Atmospheric workspace" 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-accent-amber/20 to-transparent mix-blend-overlay" />
+              <div className="absolute inset-0 border border-white/10 rounded-2xl" />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
     </main>
   );
 }

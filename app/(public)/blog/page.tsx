@@ -1,59 +1,55 @@
 import { createClient } from '@/app/lib/supabase/server';
-import Link from 'next/link';
+import PostCard from '@/app/components/PostCard';
 
 export default async function BlogPage() {
   const supabase = await createClient();
   const { data: posts, error } = await supabase
     .from('posts')
-    .select('id, title, slug, excerpt, published_at')
+    .select('id, title, slug, excerpt, published_at, category, cover_image')
     .eq('status', 'published')
     .order('published_at', { ascending: false });
 
   if (error) {
     console.error('Error fetching posts:', error);
     return (
-      <main className="mx-auto max-w-5xl px-6 py-16">
-        <h1 className="mb-4 text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-          Blog
+      <main className="mx-auto max-w-7xl px-6 py-24">
+        <h1 className="font-heading text-5xl md:text-7xl text-text-primary mb-12 animate-fade-in opacity-0">
+          The Archive
         </h1>
-        <p className="text-red-500">Error loading posts.</p>
+        <div className="bg-accent-amber/10 border border-accent-amber rounded-xl p-8 text-center max-w-2xl mx-auto">
+          <p className="text-accent-amber mb-2">Failed to load the archive.</p>
+          <p className="text-text-secondary text-sm">Please try again later.</p>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="mb-8 text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl lg:text-6xl">
-        Blog
+    <main className="mx-auto max-w-7xl px-6 py-24">
+      <h1 className="font-heading text-5xl md:text-7xl text-text-primary mb-16 animate-fade-in opacity-0">
+        The Archive
       </h1>
 
       {posts && posts.length > 0 ? (
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 [column-fill:balance]">
           {posts.map((post) => (
-            <Link
-              key={post.id}
-              href={`/blog/${post.slug}`}
-              className="group block rounded-lg border border-zinc-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-zinc-300 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800 dark:hover:border-zinc-600"
-            >
-              <h2 className="mb-2 text-xl font-semibold text-zinc-900 transition-colors duration-300 group-hover:text-blue-600 dark:text-zinc-50 dark:group-hover:text-blue-400">
-                {post.title}
-              </h2>
-              {post.excerpt && (
-                <p className="mb-4 text-zinc-600 dark:text-zinc-400">
-                  {post.excerpt}
-                </p>
-              )}
-              {post.published_at && (
-                <p className="text-sm text-zinc-500 dark:text-zinc-500">
-                  Published on{' '}
-                  {new Date(post.published_at).toLocaleDateString()}
-                </p>
-              )}
-            </Link>
+            <div key={post.id} className="break-inside-avoid mb-6">
+              <PostCard
+                title={post.title}
+                slug={post.slug}
+                excerpt={post.excerpt || ''}
+                date={post.published_at ? new Date(post.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Unknown Date'}
+                category={post.category || 'General'}
+                coverImage={post.cover_image}
+              />
+            </div>
           ))}
         </div>
       ) : (
-        <p className="text-zinc-600 dark:text-zinc-400">No published posts yet.</p>
+        <div className="text-center py-24">
+          <h2 className="font-heading text-4xl italic text-text-secondary mb-4">No stories yet...</h2>
+          <p className="text-text-tertiary">The archive is currently empty. Check back when the stars are out.</p>
+        </div>
       )}
     </main>
   );
