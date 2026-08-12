@@ -32,7 +32,8 @@ export default function TownSquare() {
       <div 
         id="townsquare-root" 
         ref={containerRef} 
-        className="min-h-[500px] w-full rounded-3xl border border-border bg-bg-surface overflow-hidden shadow-2xl relative"
+        className="min-h-[600px] w-full rounded-3xl border border-border bg-bg-surface overflow-hidden shadow-2xl relative"
+        style={{ transform: 'translateZ(0)' }}
       >
         {/* Simple loading state while script fetches */}
         <div className="absolute inset-0 flex items-center justify-center -z-10">
