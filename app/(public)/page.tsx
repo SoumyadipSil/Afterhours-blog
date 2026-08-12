@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import HeroBlobs from '@/app/components/HeroBlobs';
 import ScrollReveal from '@/app/components/ScrollReveal';
+import TownSquare from '@/app/components/TownSquare';
 
 const GALLERY_IMAGES = [
   { id: '1', caption: "City Lights", height: "h-80", src: "https://i.pinimg.com/1200x/e0/4a/08/e04a086bb6bcc1b538b64a7acde732d5.jpg" },
@@ -154,6 +155,17 @@ export default function HomePage() {
               </span>
             </div>
           </div>
+        </ScrollReveal>
+      </section>
+
+      {/* 2f. TownSquare Community */}
+      <section className="py-24 px-6 max-w-5xl mx-auto">
+        <ScrollReveal delay={200}>
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-4xl text-text-primary mb-4">The TownSquare</h2>
+            <p className="text-text-secondary text-lg">Join the conversation. Leave a thought.</p>
+          </div>
+          <TownSquare />
         </ScrollReveal>
       </section>
     </div>
