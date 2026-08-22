@@ -12,19 +12,20 @@ export default function ScrollReveal({ children, delay = 0, className = '' }: Sc
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (ref.current) observer.unobserve(ref.current);
+          observer.unobserve(el);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '50px' }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(el);
 
     return () => observer.disconnect();
   }, []);
@@ -33,7 +34,7 @@ export default function ScrollReveal({ children, delay = 0, className = '' }: Sc
     <div
       ref={ref}
       className={`${className} ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}
-      style={{ animationDelay: `${delay}ms` }}
+      style={isVisible ? { animationDelay: `${delay}ms`, willChange: 'auto' } : { willChange: 'transform, opacity' }}
     >
       {children}
     </div>
