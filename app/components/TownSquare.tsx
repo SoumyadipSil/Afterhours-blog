@@ -1,10 +1,31 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function TownSquare() {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
     // Check if script already exists to avoid duplicates during React StrictMode or navigation
     if (document.getElementById('townsquare-script')) return;
 
@@ -20,7 +41,7 @@ export default function TownSquare() {
       });
     `;
     document.body.appendChild(script);
-  }, []);
+  }, [isVisible]);
 
   return (
     <div className="w-full">
