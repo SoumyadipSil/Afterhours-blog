@@ -13,9 +13,6 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal delay={0}>
             <h1 className="font-heading text-5xl md:text-7xl text-text-primary mb-6">About</h1>
-            <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-              The person behind the late night commits and midnight reflections.
-            </p>
           </ScrollReveal>
         </div>
       </section>
@@ -24,19 +21,13 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <ScrollReveal delay={100}>
             <div className="prose prose-invert prose-amber max-w-none prose-headings:font-heading">
-              <h2 className="text-3xl text-text-primary mb-6">Hello, I'm Soumyadip</h2>
-              <p className="text-text-secondary leading-relaxed mb-6">
-                I'm a software engineer and designer who finds the most clarity after the sun goes down. 
-                AfterHours is my digital garden — a space where I document the things I build, 
-                the thoughts that keep me awake, and the aesthetics that inspire me.
-              </p>
+              <h2 className="text-3xl text-text-primary mb-6">Hello, I&apos;m Soumyadip</h2>
+              {/* Write your own bio here */}
               <p className="text-text-secondary leading-relaxed mb-8">
-                By day, I work on complex systems and user interfaces. By night, I experiment with new frameworks,
-                write personal essays, and curate this corner of the internet. The goal isn't just to share code, 
-                but to share the human experience behind the screen.
+                ...
               </p>
 
-              <h3 className="text-xl text-text-primary mb-4 font-heading">Interests & Focus</h3>
+              <h3 className="text-xl text-text-primary mb-4 font-heading">Interests &amp; Focus</h3>
               <div className="flex flex-wrap gap-2">
                 {interests.map((interest) => (
                   <span 
