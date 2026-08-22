@@ -6,9 +6,6 @@ import ScrollReveal from '@/app/components/ScrollReveal';
 import TownSquare from '@/app/components/TownSquare';
 import AIChatWidget from '@/app/components/AIChatWidget';
 
-export const revalidate = 0;
-export const dynamic = 'force-dynamic';
-
 const GALLERY_IMAGES = [
   { id: '1', caption: "City Lights", height: "h-80", src: "https://i.pinimg.com/1200x/e0/4a/08/e04a086bb6bcc1b538b64a7acde732d5.jpg" },
   { id: '2', caption: "Midnight Reflections", height: "h-96", src: "https://i.pinimg.com/736x/cf/9b/8a/cf9b8a080b02d3f90fb12f48c65e6cac.jpg" },
