@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GrainOverlay from "./components/GrainOverlay";
 
-const playfair = Playfair_Display({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
   variable: "--font-heading",
 });
@@ -33,6 +33,24 @@ export const metadata: Metadata = {
     "Late-night life reflections and coding projects by Soumyadip — with an AI guide through the site.",
 };
 
+// Anti-flash script: reads localStorage before paint to set the correct theme class
+const themeScript = `
+  (function() {
+    try {
+      var theme = localStorage.getItem('afterhours-theme');
+      if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+      }
+    } catch(e) {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,8 +59,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${geistMono.variable} h-full antialiased dark`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <GrainOverlay />
         {children}

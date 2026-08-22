@@ -1,19 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --bg-primary: hsl(240, 6%, 8%);
-  --bg-elevated: hsl(240, 6%, 12%);
-  --bg-surface: hsl(240, 6%, 16%);
+/* ===== DARK THEME (Default) ===== */
+html.dark {
+  --bg-primary: hsl(240, 6%, 5%);
+  --bg-elevated: hsl(240, 6%, 10%);
+  --bg-surface: hsl(240, 6%, 14%);
   --border: hsla(280, 20%, 30%, 0.25);
-  --border-hover: hsla(280, 40%, 45%, 0.4);
-  --text-primary: hsl(220, 15%, 90%);
+  --border-hover: hsla(280, 40%, 50%, 0.4);
+  --text-primary: hsl(220, 15%, 92%);
   --text-secondary: hsl(220, 10%, 65%);
-  --text-tertiary: hsl(220, 8%, 45%);
-  --accent-amber: hsl(280, 85%, 65%); /* Neon Violet */
-  --accent-amber-muted: hsl(280, 50%, 40%); /* Muted Violet */
-  --accent-rose: hsl(330, 85%, 60%); /* Neon Pink */
-  --accent-slate: hsl(195, 90%, 55%); /* Electric Cyan */
-  --glow-amber: hsla(280, 85%, 65%, 0.15); /* Violet Glow */
+  --text-tertiary: hsl(220, 8%, 42%);
+  --accent-amber: hsl(280, 85%, 65%);
+  --accent-amber-muted: hsl(280, 50%, 40%);
+  --accent-rose: hsl(330, 85%, 60%);
+  --accent-slate: hsl(195, 90%, 55%);
+  --glow-amber: hsla(280, 85%, 65%, 0.15);
+  --glass-bg: hsla(240, 6%, 5%, 0.6);
+}
+
+/* ===== LIGHT THEME ===== */
+html.light {
+  --bg-primary: hsl(0, 0%, 97%);
+  --bg-elevated: hsl(0, 0%, 100%);
+  --bg-surface: hsl(240, 5%, 93%);
+  --border: hsla(240, 10%, 80%, 0.5);
+  --border-hover: hsla(280, 40%, 55%, 0.5);
+  --text-primary: hsl(240, 6%, 12%);
+  --text-secondary: hsl(220, 8%, 42%);
+  --text-tertiary: hsl(220, 6%, 62%);
+  --accent-amber: hsl(280, 75%, 55%);
+  --accent-amber-muted: hsl(280, 45%, 65%);
+  --accent-rose: hsl(330, 75%, 50%);
+  --accent-slate: hsl(195, 80%, 40%);
+  --glow-amber: hsla(280, 75%, 55%, 0.1);
+  --glass-bg: hsla(0, 0%, 100%, 0.6);
+}
+
+/* Fallback if no class is set yet (prevent flash) */
+:root {
+  --bg-primary: hsl(240, 6%, 5%);
+  --bg-elevated: hsl(240, 6%, 10%);
+  --bg-surface: hsl(240, 6%, 14%);
+  --border: hsla(280, 20%, 30%, 0.25);
+  --border-hover: hsla(280, 40%, 50%, 0.4);
+  --text-primary: hsl(220, 15%, 92%);
+  --text-secondary: hsl(220, 10%, 65%);
+  --text-tertiary: hsl(220, 8%, 42%);
+  --accent-amber: hsl(280, 85%, 65%);
+  --accent-amber-muted: hsl(280, 50%, 40%);
+  --accent-rose: hsl(330, 85%, 60%);
+  --accent-slate: hsl(195, 90%, 55%);
+  --glow-amber: hsla(280, 85%, 65%, 0.15);
+  --glass-bg: hsla(240, 6%, 5%, 0.6);
 }
 
 @theme inline {
@@ -73,6 +111,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-body), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
@@ -153,9 +192,9 @@ body {
 
 /* Utilities */
 .glass {
-  background: hsla(20, 5%, 8%, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
 }
 

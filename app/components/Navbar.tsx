@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,26 +15,36 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 w-full z-40 transition-all duration-300 ${
-        scrolled ? 'bg-bg-primary/80 backdrop-blur-xl border-b border-border' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="font-heading text-2xl font-semibold text-text-primary">
+    <header className="fixed top-5 left-1/2 -translate-x-1/2 z-40 w-auto">
+      <nav
+        className={`flex items-center gap-6 px-6 py-2.5 rounded-full transition-all duration-300 ${
+          scrolled
+            ? 'glass shadow-lg shadow-black/10'
+            : 'glass'
+        }`}
+      >
+        {/* Logo */}
+        <Link href="/" className="font-heading text-lg font-semibold text-text-primary whitespace-nowrap">
           AfterHours
         </Link>
-        <nav className="flex gap-6">
-          <Link href="/blog" className="text-text-secondary hover:text-accent-amber transition-colors relative group">
-            Blog
-            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-accent-amber transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link href="/about" className="text-text-secondary hover:text-accent-amber transition-colors relative group">
-            About
-            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-accent-amber transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-        </nav>
-      </div>
+
+        {/* Divider */}
+        <span className="w-px h-4 bg-border" />
+
+        {/* Nav Links */}
+        <Link href="/blog" className="text-sm text-text-secondary hover:text-accent-amber transition-colors">
+          Blog
+        </Link>
+        <Link href="/about" className="text-sm text-text-secondary hover:text-accent-amber transition-colors">
+          About
+        </Link>
+
+        {/* Divider */}
+        <span className="w-px h-4 bg-border" />
+
+        {/* Theme Toggle */}
+        <ThemeToggle />
+      </nav>
     </header>
   );
 }

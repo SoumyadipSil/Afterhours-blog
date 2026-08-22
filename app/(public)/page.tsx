@@ -22,23 +22,26 @@ export default function HomePage() {
         <HeroBlobs />
         
         <div className="relative z-10 text-center px-6">
-          <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl tracking-tight text-text-primary mb-6 animate-fade-in opacity-0">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl tracking-tight text-text-primary mb-3 animate-fade-in opacity-0">
             AfterHours
           </h1>
-          <p className="font-body text-xl md:text-2xl text-text-secondary mb-10 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            A Journal of Nights, Reflections & Late Night Thoughts.
+          <p className="text-sm md:text-base text-text-tertiary font-mono tracking-wide mb-6 animate-fade-in opacity-0" style={{ animationDelay: '0.15s' }}>
+            written by Soumyadip
+          </p>
+          <p className="text-lg md:text-xl text-text-secondary mb-10 max-w-xl mx-auto animate-slide-up opacity-0" style={{ animationDelay: '0.3s' }}>
+            A journal of nights, reflections &amp; late-night thoughts.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up opacity-0" style={{ animationDelay: '0.45s' }}>
             <Link
               href="/blog"
-              className="bg-accent-amber text-bg-primary px-8 py-3 rounded-full font-medium hover:bg-glow-amber transition-colors"
+              className="bg-accent-amber text-bg-primary px-8 py-3 rounded-full font-medium hover:shadow-lg hover:shadow-glow-amber transition-all"
             >
               Explore the Archive
             </Link>
             <Link
               href="/about"
-              className="border border-border px-8 py-3 rounded-full font-medium text-text-primary hover:border-border-hover hover:bg-bg-surface transition-colors"
+              className="border border-border px-8 py-3 rounded-full font-medium text-text-primary hover:border-border-hover hover:bg-bg-surface transition-all"
             >
               About the Author
             </Link>
