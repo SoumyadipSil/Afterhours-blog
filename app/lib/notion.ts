@@ -69,10 +69,12 @@ export async function getAllPublishedPosts(category?: string): Promise<BlogPost[
     ];
 
     if (category) {
+      // Capitalize first letter to match Notion tags (e.g., 'life' -> 'Life')
+      const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
       filters.push({
         property: 'Category',
         select: {
-          equals: category,
+          equals: formattedCategory,
         },
       });
     }
