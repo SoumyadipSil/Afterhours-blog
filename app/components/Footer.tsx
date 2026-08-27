@@ -25,9 +25,9 @@ export default function Footer() {
           <div>
             <h4 className="text-text-primary font-medium mb-3">Connect</h4>
             <ul className="flex flex-col gap-2">
-              <li><a href="#" className="text-text-secondary hover:text-accent-amber text-sm transition-colors">Twitter</a></li>
-              <li><a href="#" className="text-text-secondary hover:text-accent-amber text-sm transition-colors">GitHub</a></li>
-              <li><a href="#" className="text-text-secondary hover:text-accent-amber text-sm transition-colors">LinkedIn</a></li>
+              <li><a href="https://soumyadipsil-devfolio.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-accent-amber text-sm transition-colors">Portfolio</a></li>
+              <li><a href="https://github.com/SoumyadipSil" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-accent-amber text-sm transition-colors">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/soumyadip-sil-bb0935385/" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-accent-amber text-sm transition-colors">LinkedIn</a></li>
             </ul>
           </div>
         </div>
