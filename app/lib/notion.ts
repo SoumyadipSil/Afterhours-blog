@@ -62,7 +62,7 @@ export async function getAllPublishedPosts(category?: string): Promise<BlogPost[
     const filters: any[] = [
       {
         property: 'Status',
-        status: {
+        select: {
           equals: 'Published',
         },
       }
