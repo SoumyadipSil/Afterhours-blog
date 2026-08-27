@@ -80,3 +80,5 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
   );
 }
 
+
+export const revalidate = 60;

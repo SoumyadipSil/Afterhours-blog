@@ -45,3 +45,5 @@ export default async function BlogPage({ searchParams }: PageProps) {
     </main>
   );
 }
+
+export const revalidate = 60;
