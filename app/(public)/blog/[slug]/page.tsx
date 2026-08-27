@@ -1,28 +1,22 @@
-import { createClient } from '@/app/lib/supabase/server';
+import { getPostBySlug } from '@/app/lib/notion';
 import { notFound } from 'next/navigation';
-import Markdown from 'react-markdown';
 import Link from 'next/link';
 import ReadingProgress from '@/app/components/ReadingProgress';
+import NotionPageRenderer from '@/app/components/NotionPageRenderer';
 
 export default async function PostPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
   const { slug } = params;
 
-  const supabase = await createClient();
-  const { data: post, error } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('slug', slug)
-    .eq('status', 'published')
-    .single();
+  const data = await getPostBySlug(slug);
 
-  if (error || !post) {
-    if (error) console.error('Error fetching post:', error);
+  if (!data) {
     notFound();
   }
 
-  const wordCount = post.content ? post.content.split(/\s+/).length : 0;
-  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+  const { postMetadata: post, recordMap } = data;
+
+  const readingTime = 5; // Can estimate this based on blocks later
 
   const isCoding = post.category?.toLowerCase() === 'coding';
   const gradientClass = isCoding
@@ -70,9 +64,9 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
 
         {/* Content Section */}
         <div className="max-w-3xl mx-auto px-6 mt-16">
-          <article className="prose prose-invert prose-amber max-w-none prose-headings:font-heading prose-a:text-accent-amber hover:prose-a:text-glow-amber transition-colors">
-            <Markdown>{post.content}</Markdown>
-          </article>
+          <div className="prose prose-invert prose-amber max-w-none prose-headings:font-heading prose-a:text-accent-amber hover:prose-a:text-glow-amber transition-colors">
+            <NotionPageRenderer recordMap={recordMap} />
+          </div>
 
           {/* Footer Navigation */}
           <div className="mt-24 pt-8 border-t border-border text-center">
