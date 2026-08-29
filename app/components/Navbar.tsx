@@ -31,7 +31,8 @@ export default function Navbar() {
         {/* Divider */}
         <span className="w-px h-4 bg-border" />
 
-        {/* Nav Links */}
+        {/* Nav L
+        inks */}
         <Link href="/blog" className="text-sm text-text-secondary hover:text-accent-amber transition-colors">
           Blog
         </Link>
