@@ -5,7 +5,6 @@ import HeroBlobs from '@/app/components/HeroBlobs';
 import ScrollReveal from '@/app/components/ScrollReveal';
 import TownSquare from '@/app/components/TownSquare';
 import AIChatWidget from '@/app/components/AIChatWidget';
-import MusicPlayer from '@/app/components/MusicPlayer';
 
 const GALLERY_IMAGES = [
   { id: '1', caption: "City Lights", height: "h-80", src: "https://i.pinimg.com/1200x/e0/4a/08/e04a086bb6bcc1b538b64a7acde732d5.jpg" },
@@ -23,8 +22,7 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <HeroBlobs />
         
-        <div className="relative z-10 text-center px-6 pt-20">
-          <MusicPlayer />
+        <div className="relative z-10 text-center px-6">
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl tracking-tight text-text-primary mb-3 animate-fade-in opacity-0">
             AfterHours
           </h1>
