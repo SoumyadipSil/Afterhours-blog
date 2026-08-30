@@ -19,7 +19,7 @@ export default function Navbar() {
       <nav
         className={`flex items-center gap-6 px-6 py-2.5 rounded-full transition-all duration-300 ${
           scrolled
-            ? 'glass shadow-lg shadow-black/10'
+            ? 'glass shadow-lg shadown-black/10'
             : 'glass'
         }`}
       >
