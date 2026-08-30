@@ -4,10 +4,9 @@ import { useState, useRef, useEffect } from 'react';
 import { Play, Pause, SkipForward, SkipBack, Music } from 'lucide-react';
 
 const TRACKS = [
-  { id: 1, title: 'Midnight City', artist: 'Lo-Fi Vibes', src: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf7f5.mp3' },
-  { id: 2, title: 'Quiet Hours', artist: 'Chill Study', src: 'https://cdn.pixabay.com/download/audio/2022/04/27/audio_67bcfdfcc4.mp3' },
-  { id: 3, title: 'Neon Reflections', artist: 'Night Beats', src: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_2fc4d9eab2.mp3' },
-  { id: 4, title: 'Coffee & Code', artist: 'Relaxing Piano', src: 'https://cdn.pixabay.com/download/audio/2021/08/08/audio_dc39bde89a.mp3' }
+  { id: 1, title: 'Addiction (Slowed)', artist: 'Night Vibes', src: '/addiction.mp3' },
+  { id: 2, title: 'Is There Someone Else?', artist: 'The Weeknd', src: '/is-there-someone-else.mp3' },
+  { id: 3, title: 'Lovesong', artist: 'Adele', src: '/lovesong.mp3' }
 ];
 
 export default function MusicPlayer() {
