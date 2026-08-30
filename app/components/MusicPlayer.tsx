@@ -59,12 +59,26 @@ export default function MusicPlayer() {
       
       <div className="relative flex items-center gap-4 bg-bg-surface/60 backdrop-blur-xl border border-border p-3 pr-4 rounded-3xl glow-card hover:border-border-hover transition-colors">
         
-        <div className="w-12 h-12 rounded-2xl bg-bg-primary border border-border flex items-center justify-center shrink-0 overflow-hidden relative shadow-inner">
-          <Music className={`w-5 h-5 transition-colors duration-500 ${isPlaying ? 'text-accent-amber' : 'text-text-tertiary'}`} />
-          {isPlaying && (
-            <div className="absolute inset-0 bg-accent-amber/10 animate-pulse"></div>
-          )}
-        </div>
+        <button 
+          onClick={togglePlay}
+          className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden relative shadow-[0_0_10px_rgba(0,0,0,0.5)] border border-white/10 transition-transform hover:scale-105"
+        >
+          {/* Vinyl Record */}
+          <div className={`w-full h-full bg-[#111] rounded-full flex items-center justify-center relative ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '4s' }}>
+            {/* Grooves */}
+            <div className="absolute inset-1 rounded-full border border-white/10"></div>
+            <div className="absolute inset-2.5 rounded-full border border-white/10"></div>
+            
+            {/* Reflection / shine */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent rounded-full"></div>
+            
+            {/* Center Label */}
+            <div className="relative w-4 h-4 bg-accent-amber rounded-full flex items-center justify-center">
+              {/* Spindle hole */}
+              <div className="w-1 h-1 bg-black rounded-full"></div>
+            </div>
+          </div>
+        </button>
 
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-end mb-0.5">
