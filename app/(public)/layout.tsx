@@ -1,5 +1,6 @@
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
+import AIChatWidget from '@/app/components/AIChatWidget';
 
 export default function PublicLayout({
   children,
@@ -13,6 +14,7 @@ export default function PublicLayout({
         {children}
       </main>
       <Footer />
+      <AIChatWidget />
     </>
   );
 }

@@ -38,6 +38,13 @@ export default function Navbar() {
         <Link href="/about" className="text-sm text-text-secondary hover:text-accent-amber transition-colors">
           About
         </Link>
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('open-ai-chat'))}
+          className="text-sm text-text-secondary hover:text-accent-amber transition-colors flex items-center gap-1.5"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-amber animate-pulse" />
+          Ask AI
+        </button>
 
         {/* Divider */}
         <span className="w-px h-4 bg-border" />

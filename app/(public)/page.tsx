@@ -5,7 +5,6 @@ import SplineScene from '@/app/components/SplineScene';
 import HeroBlobs from '@/app/components/HeroBlobs';
 import ScrollReveal from '@/app/components/ScrollReveal';
 import TownSquare from '@/app/components/TownSquare';
-import AIChatWidget from '@/app/components/AIChatWidget';
 import MusicPlayer from '@/app/components/MusicPlayer';
 
 const GALLERY_IMAGES = [
@@ -135,14 +134,7 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
-      {/* 2e. AI Guide — Live Chat */}
-      <section className="py-24 px-6 max-w-2xl mx-auto">
-        <ScrollReveal delay={100}>
-          <AIChatWidget />
-        </ScrollReveal>
-      </section>
-
-      {/* 2f. TownSquare Community */}
+      {/* 2e. TownSquare Community */}
       <section className="py-24 px-6 max-w-5xl mx-auto">
         <ScrollReveal delay={200}>
           <div className="text-center mb-12">

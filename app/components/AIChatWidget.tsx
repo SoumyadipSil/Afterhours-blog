@@ -1,6 +1,13 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 
+// Define a custom event type
+declare global {
+  interface WindowEventMap {
+    'open-ai-chat': CustomEvent;
+  }
+}
+
 interface Message {
   role: 'user' | 'assistant';
   content: string;
@@ -10,8 +17,15 @@ export default function AIChatWidget() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('open-ai-chat', handleOpen as EventListener);
+    return () => window.removeEventListener('open-ai-chat', handleOpen as EventListener);
+  }, []);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -90,24 +104,48 @@ export default function AIChatWidget() {
     }
   };
 
+  if (!isOpen) {
+    return (
+      <button
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-6 right-6 z-50 glass px-5 py-3.5 rounded-full border border-border flex items-center gap-3 hover:shadow-lg hover:shadow-glow-amber transition-all cursor-pointer group"
+      >
+        <div className="w-2 h-2 rounded-full bg-accent-amber animate-pulse" />
+        <span className="font-heading text-sm font-semibold text-text-primary group-hover:text-accent-amber transition-colors">
+          Ask AI
+        </span>
+      </button>
+    );
+  }
+
   return (
-    <div className="glass rounded-3xl overflow-hidden border border-border flex flex-col" style={{ height: '480px' }}>
+    <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] glass rounded-3xl overflow-hidden border border-border flex flex-col shadow-2xl animate-fade-in" style={{ height: '480px' }}>
       {/* Header */}
       <div className="px-6 py-4 border-b border-border flex items-center gap-3">
         <div className="w-8 h-8 bg-bg-elevated rounded-lg flex items-center justify-center border border-border">
           <span className="text-sm">✦</span>
         </div>
-        <div>
+        <div className="flex-1">
           <h3 className="font-heading text-sm font-semibold text-text-primary">AI Guide</h3>
           <p className="text-xs text-text-tertiary">ask me anything about soumyadip or the blog</p>
         </div>
-        {isLoading && (
-          <div className="ml-auto flex gap-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style={{ animationDelay: '0ms' }} />
-            <div className="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style={{ animationDelay: '150ms' }} />
-            <div className="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style={{ animationDelay: '300ms' }} />
-          </div>
-        )}
+        <div className="flex items-center gap-3">
+          {isLoading && (
+            <div className="flex gap-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style={{ animationDelay: '0ms' }} />
+              <div className="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style={{ animationDelay: '150ms' }} />
+              <div className="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style={{ animationDelay: '300ms' }} />
+            </div>
+          )}
+          <button 
+            onClick={() => setIsOpen(false)} 
+            className="text-text-tertiary hover:text-text-primary transition-colors p-1"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Messages */}

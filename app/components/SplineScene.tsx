@@ -6,7 +6,7 @@ export default function SplineScene() {
         frameBorder="0" 
         width="100%" 
         height="100%"
-        className="w-[120%] h-[120%] object-cover scale-110"
+        className="w-[120%] h-[120%] object-cover scale-[1.15] -translate-y-[10%]"
       ></iframe>
     </div>
   );
