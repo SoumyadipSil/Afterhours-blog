@@ -20,10 +20,10 @@ export default function HomePage() {
   return (
     <div className="w-full">
       {/* 2a. Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100vh] -mt-20 flex items-center justify-center overflow-hidden">
         <SplineScene />
         
-        <div className="relative z-10 text-center px-6 -mt-16">
+        <div className="relative z-10 text-center px-6">
           <MusicPlayer />
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl tracking-tight text-text-primary mb-3 animate-fade-in opacity-0">
             AfterHours

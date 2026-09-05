@@ -54,26 +54,26 @@ export default function MusicPlayer() {
   };
 
   return (
-    <div className="relative group max-w-[320px] mx-auto mb-12 animate-fade-in opacity-0" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
+    <div className="relative group w-[380px] max-w-full mx-auto mb-12 animate-fade-in opacity-0" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
       <div className={`absolute -inset-1 rounded-3xl blur-md transition-all duration-1000 ${isPlaying ? 'bg-accent-amber/20 opacity-100' : 'bg-border/10 opacity-50 group-hover:opacity-100'}`}></div>
       
-      <div className="relative flex items-center gap-4 bg-bg-surface/60 backdrop-blur-xl border border-border p-3 pr-4 rounded-3xl glow-card hover:border-border-hover transition-colors">
+      <div className="relative flex items-center gap-4 bg-bg-surface/60 backdrop-blur-xl border border-border p-2.5 pr-4 rounded-3xl glow-card hover:border-border-hover transition-colors">
         
         <button 
           onClick={togglePlay}
-          className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden relative shadow-[0_0_10px_rgba(0,0,0,0.5)] border border-white/10 transition-transform hover:scale-105"
+          className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 overflow-hidden relative shadow-[0_0_15px_rgba(0,0,0,0.8)] border border-white/20 transition-transform hover:scale-105 ml-0.5"
         >
           {/* Vinyl Record */}
-          <div className={`w-full h-full bg-[#111] rounded-full flex items-center justify-center relative ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '4s' }}>
+          <div className={`w-full h-full bg-[#111] rounded-full flex items-center justify-center relative ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '3s' }}>
             {/* Grooves */}
             <div className="absolute inset-1 rounded-full border border-white/10"></div>
             <div className="absolute inset-2.5 rounded-full border border-white/10"></div>
             
             {/* Reflection / shine */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent rounded-full"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/25 to-transparent rounded-full"></div>
             
             {/* Center Label */}
-            <div className="relative w-4 h-4 bg-accent-amber rounded-full flex items-center justify-center">
+            <div className="relative w-3.5 h-3.5 bg-accent-amber rounded-full flex items-center justify-center shadow-sm">
               {/* Spindle hole */}
               <div className="w-1 h-1 bg-black rounded-full"></div>
             </div>
