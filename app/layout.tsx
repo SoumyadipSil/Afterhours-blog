@@ -33,24 +33,6 @@ export const metadata: Metadata = {
     "Late-night life reflections and coding projects by Soumyadip — with an AI guide through the site.",
 };
 
-// Anti-flash script: reads localStorage before paint to set the correct theme class
-const themeScript = `
-  (function() {
-    try {
-      var theme = localStorage.getItem('afterhours-theme');
-      if (theme === 'light') {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-      } else {
-        document.documentElement.classList.remove('light');
-        document.documentElement.classList.add('dark');
-      }
-    } catch(e) {
-      document.documentElement.classList.add('dark');
-    }
-  })();
-`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -60,11 +42,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} ${geistMono.variable} h-full antialiased dark`}
-      suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="min-h-full flex flex-col">
         <GrainOverlay />
         {children}
