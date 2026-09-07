@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import SplineScene from '@/app/components/SplineScene';
 import HeroBlobs from '@/app/components/HeroBlobs';
 import ScrollReveal from '@/app/components/ScrollReveal';
 import TownSquare from '@/app/components/TownSquare';
@@ -21,7 +20,7 @@ export default function HomePage() {
     <div className="w-full">
       {/* 2a. Hero Section */}
       <section className="relative min-h-[100vh] -mt-20 flex items-center justify-center overflow-hidden">
-        <SplineScene />
+        <HeroBlobs />
         
         <div className="relative z-10 text-center px-6">
           <MusicPlayer />
