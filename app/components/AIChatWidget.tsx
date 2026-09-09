@@ -108,12 +108,14 @@ export default function AIChatWidget() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 glass px-5 py-3.5 rounded-full border border-border flex items-center gap-3 hover:shadow-lg hover:shadow-glow-amber transition-all cursor-pointer group"
+        aria-label="Ask AI / Midnight Whisper"
+        className="fixed bottom-6 right-6 z-50 glass-pill rounded-full px-4 py-2.5 flex items-center gap-2.5 text-xs font-medium text-zinc-300 hover:text-white hover:border-violet-400/50 transition-all duration-300 shadow-2xl group active:scale-95 cursor-pointer"
       >
-        <div className="w-2 h-2 rounded-full bg-accent-amber animate-pulse" />
-        <span className="font-heading text-sm font-semibold text-text-primary group-hover:text-accent-amber transition-colors">
-          Ask AI
+        <span className="relative flex h-2.5 w-2.5 items-center justify-center">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.95)]" />
         </span>
+        <span className="tracking-wide font-sans">Ask AI</span>
       </button>
     );
   }

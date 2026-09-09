@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GrainOverlay from "./components/GrainOverlay";
+import CursorGlow from "./components/CursorGlow";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -43,7 +44,8 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-noise">
+        <CursorGlow />
         <GrainOverlay />
         {children}
       </body>
