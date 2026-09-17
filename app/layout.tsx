@@ -44,7 +44,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-noise">
+      <body className="min-h-full flex flex-col">
         <CursorGlow />
         <GrainOverlay />
         {children}
