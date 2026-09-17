@@ -5,7 +5,7 @@ import Link from 'next/link';
 import HeroBlobs from '@/app/components/HeroBlobs';
 import ScrollReveal from '@/app/components/ScrollReveal';
 import MusicPlayer from '@/app/components/MusicPlayer';
-import { ArrowRight, Music, BookOpen, Coffee } from 'lucide-react';
+import { ArrowRight, BookOpen } from 'lucide-react';
 
 const GALLERY_IMAGES = [
   { id: '1', caption: "City Lights", height: "h-80", src: "https://i.pinimg.com/1200x/e0/4a/08/e04a086bb6bcc1b538b64a7acde732d5.jpg" },
@@ -91,101 +91,92 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. The 3 AM Shelf Section */}
-      <section id="shelf" className="max-w-4xl mx-auto px-6 py-16 border-t border-zinc-900/80">
+      {/* 2. The 3 AM Shelf Section (Books) */}
+      <section id="shelf" className="max-w-4xl mx-auto px-6 py-16">
         <ScrollReveal>
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <span className="text-xs font-mono text-zinc-500 tracking-widest uppercase">Atmosphere</span>
-              <h2 className="text-xl font-bold text-zinc-200 font-heading">The 3 AM Shelf</h2>
-            </div>
-            <span className="text-xs font-mono text-zinc-600">Click card for notes</span>
+          <div className="mb-8">
+            <span className="text-xs font-mono text-zinc-500 tracking-widest uppercase">Atmosphere</span>
+            <h2 className="text-xl font-bold text-zinc-200 font-heading">The 3 AM Shelf</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {/* Card 1: Midnight Audio */}
+            {/* Book 1: East of Eden */}
             <div
-              onClick={() => toggleShelf('track')}
+              onClick={() => toggleShelf('eden')}
               onMouseMove={handleMouseMove}
               className={`shelf-card spotlight-card p-5 rounded-xl bg-zinc-900/20 border border-zinc-800/70 hover:bg-zinc-900/50 cursor-pointer group select-none ${
-                expandedShelf === 'track' ? 'is-expanded' : ''
-              }`}
-            >
-              <div className="text-[10px] font-mono text-zinc-500 uppercase mb-2 flex items-center justify-between">
-                <span className="flex items-center gap-1.5 group-hover:text-zinc-400 transition-colors">
-                  <Music className="w-3 h-3 text-zinc-400 group-hover:text-violet-400 group-hover:scale-110 transition-all duration-300" />
-                  Current Track
-                </span>
-                <span className="text-[10px] text-zinc-600 group-hover:text-violet-400 transition-colors font-mono">✦</span>
-              </div>
-              <div className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors">
-                Kavinsky — Nightcall
-              </div>
-              <p className="text-xs text-zinc-500 mt-1 font-mono">Slowed + Reverb Cut</p>
-              <div className="shelf-quote pt-2 border-t border-zinc-800/50 text-[11px] font-mono text-zinc-400 leading-relaxed italic">
-                &quot;I&apos;m giving you a night call to tell you how I feel...&quot; Perfect for empty arterial highways.
-              </div>
-            </div>
-
-            {/* Card 2: Late Night Reading */}
-            <div
-              onClick={() => toggleShelf('book')}
-              onMouseMove={handleMouseMove}
-              className={`shelf-card spotlight-card p-5 rounded-xl bg-zinc-900/20 border border-zinc-800/70 hover:bg-zinc-900/50 cursor-pointer group select-none ${
-                expandedShelf === 'book' ? 'is-expanded' : ''
+                expandedShelf === 'eden' ? 'is-expanded' : ''
               }`}
             >
               <div className="text-[10px] font-mono text-zinc-500 uppercase mb-2 flex items-center justify-between">
                 <span className="flex items-center gap-1.5 group-hover:text-zinc-400 transition-colors">
                   <BookOpen className="w-3 h-3 text-zinc-400 group-hover:text-violet-400 group-hover:scale-110 transition-all duration-300" />
-                  Nightstand Reading
+                  Reading Now
                 </span>
                 <span className="text-[10px] text-zinc-600 group-hover:text-violet-400 transition-colors font-mono">✦</span>
               </div>
               <div className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors">
-                Kafka on the Shore
+                East of Eden
               </div>
-              <p className="text-xs text-zinc-500 mt-1 font-mono">Haruki Murakami</p>
+              <p className="text-xs text-zinc-500 mt-1 font-mono">John Steinbeck</p>
               <div className="shelf-quote pt-2 border-t border-zinc-800/50 text-[11px] font-mono text-zinc-400 leading-relaxed italic">
-                &quot;Memories warm you up from the inside. But they also tear you apart.&quot;
+                &quot;And now that you don&apos;t have to be perfect, you can be good.&quot; — Timshel.
               </div>
             </div>
 
-            {/* Card 3: Late Night Companion */}
+            {/* Book 2: The Count of Monte Cristo */}
             <div
-              onClick={() => toggleShelf('tea')}
+              onClick={() => toggleShelf('montecristo')}
               onMouseMove={handleMouseMove}
               className={`shelf-card spotlight-card p-5 rounded-xl bg-zinc-900/20 border border-zinc-800/70 hover:bg-zinc-900/50 cursor-pointer group select-none ${
-                expandedShelf === 'tea' ? 'is-expanded' : ''
+                expandedShelf === 'montecristo' ? 'is-expanded' : ''
               }`}
             >
               <div className="text-[10px] font-mono text-zinc-500 uppercase mb-2 flex items-center justify-between">
                 <span className="flex items-center gap-1.5 group-hover:text-zinc-400 transition-colors">
-                  <Coffee className="w-3 h-3 text-zinc-400 group-hover:text-amber-400 group-hover:scale-110 transition-all duration-300" />
-                  Midnight Brew
+                  <BookOpen className="w-3 h-3 text-zinc-400 group-hover:text-violet-400 group-hover:scale-110 transition-all duration-300" />
+                  Reading Now
                 </span>
-                <span className="text-[10px] text-zinc-600 group-hover:text-amber-400 transition-colors font-mono">✦</span>
+                <span className="text-[10px] text-zinc-600 group-hover:text-violet-400 transition-colors font-mono">✦</span>
               </div>
               <div className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors">
-                Chamomile &amp; Wild Honey
+                The Count of Monte Cristo
               </div>
-              <p className="text-xs text-zinc-500 mt-1 font-mono">Steeped 7 minutes hot</p>
+              <p className="text-xs text-zinc-500 mt-1 font-mono">Alexandre Dumas</p>
               <div className="shelf-quote pt-2 border-t border-zinc-800/50 text-[11px] font-mono text-zinc-400 leading-relaxed italic">
-                Calms the midnight nervous system. Golden notes of apple blossoms and amber nectar.
+                &quot;All human wisdom is contained in these two words: &apos;Wait and Hope.&apos;&quot;
+              </div>
+            </div>
+
+            {/* Book 3: Crime and Punishment */}
+            <div
+              onClick={() => toggleShelf('crime')}
+              onMouseMove={handleMouseMove}
+              className={`shelf-card spotlight-card p-5 rounded-xl bg-zinc-900/20 border border-zinc-800/70 hover:bg-zinc-900/50 cursor-pointer group select-none ${
+                expandedShelf === 'crime' ? 'is-expanded' : ''
+              }`}
+            >
+              <div className="text-[10px] font-mono text-zinc-500 uppercase mb-2 flex items-center justify-between">
+                <span className="flex items-center gap-1.5 group-hover:text-zinc-400 transition-colors">
+                  <BookOpen className="w-3 h-3 text-zinc-400 group-hover:text-violet-400 group-hover:scale-110 transition-all duration-300" />
+                  Reading Now
+                </span>
+                <span className="text-[10px] text-zinc-600 group-hover:text-violet-400 transition-colors font-mono">✦</span>
+              </div>
+              <div className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors">
+                Crime and Punishment
+              </div>
+              <p className="text-xs text-zinc-500 mt-1 font-mono">Fyodor Dostoevsky</p>
+              <div className="shelf-quote pt-2 border-t border-zinc-800/50 text-[11px] font-mono text-zinc-400 leading-relaxed italic">
+                &quot;Pain and suffering are always inevitable for a large intelligence and a deep heart.&quot;
               </div>
             </div>
           </div>
         </ScrollReveal>
       </section>
 
-      {/* 3. Aesthetic Image Gallery Section */}
-      <section className="py-20 px-6 max-w-7xl mx-auto border-t border-zinc-900/80">
-        <ScrollReveal>
-          <div className="mb-8 text-center sm:text-left">
-            <span className="text-xs font-mono text-zinc-500 tracking-widest uppercase">Visual Journal</span>
-            <h2 className="text-2xl font-bold text-zinc-200 font-heading">Atmospheric Frames</h2>
-          </div>
-        </ScrollReveal>
+      {/* 3. Aesthetic Image Gallery Section (Direct Frames) */}
+      <section className="py-16 px-6 max-w-7xl mx-auto">
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 [column-fill:balance]">
           {GALLERY_IMAGES.map((img, i) => (
             <ScrollReveal key={img.id} delay={i * 80} className="break-inside-avoid mb-6">
@@ -206,7 +197,7 @@ export default function HomePage() {
       </section>
 
       {/* 4. Category Showcase Section (Matches Notion Database Headers: Life & Coding) */}
-      <section className="py-20 px-6 max-w-5xl mx-auto border-t border-zinc-900/80">
+      <section className="py-16 px-6 max-w-5xl mx-auto">
         <ScrollReveal>
           <div className="mb-8">
             <span className="text-xs font-mono text-zinc-500 tracking-widest uppercase">Sections</span>
@@ -258,7 +249,7 @@ export default function HomePage() {
 
       {/* 5. About Teaser Strip */}
       <ScrollReveal delay={100}>
-        <section className="relative py-20 px-6 border-t border-zinc-900/80 overflow-hidden">
+        <section className="relative py-20 px-6 overflow-hidden">
           <img
             src="https://i.pinimg.com/originals/ca/26/2e/ca262e0354eea311c41134c3e4bc3bc2.gif"
             alt=""

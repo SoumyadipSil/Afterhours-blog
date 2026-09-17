@@ -23,7 +23,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="border-t border-zinc-900/90 py-12 px-6 relative z-10">
+    <footer className="py-12 px-6 relative z-10">
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-zinc-600 font-mono">
         <div className="flex items-center gap-3">
           <span className="text-zinc-400 font-semibold">AfterHours</span>
