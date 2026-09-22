@@ -223,48 +223,42 @@ body {
 }
 
 .vinyl-grooves {
-  background-image: repeating-radial-gradient(circle at 50% 50%, #1b1b24, #1b1b24 2px, #0b0b0f 3px, #0b0b0f 4.5px);
+  background:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      #0d0d10 0px,
+      #1a1a20 1px,
+      #0d0d10 2px,
+      #17171c 3px
+    ),
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,0.06), transparent 55%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 2px 6px rgba(0,0,0,0.8),
+    inset 0 -1px 3px rgba(255,255,255,0.04),
+    0 4px 14px rgba(0,0,0,0.55);
 }
 
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+.vinyl-spin {
+  animation: vinylSpin 3.5s linear infinite;
 }
 
-.reveal-on-scroll.is-revealed {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-.scrubber-track {
-  width: 100%;
-  height: 4px;
-  background: var(--bg-surface);
-  border-radius: 2px;
-  position: relative;
-  cursor: pointer;
+.vinyl-label {
+  background: radial-gradient(circle at 40% 35%, #8b5cf6, #5b21b6 70%);
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.35),
+    inset 0 -2px 4px rgba(0,0,0,0.5),
+    0 0 6px rgba(139,92,246,0.5);
 }
 
-.scrubber-progress {
-  height: 100%;
-  background: var(--accent-amber);
-  border-radius: 2px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.scrubber-thumb {
-  width: 12px;
-  height: 12px;
-  background: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: -6px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+.vinyl-shine {
+  background: linear-gradient(115deg, rgba(255,255,255,0.15) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.05) 100%);
+  mix-blend-mode: overlay;
 }
 
 .shelf-card {

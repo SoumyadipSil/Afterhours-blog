@@ -109,18 +109,27 @@ export default function MusicPlayer() {
         {/* Slim single-row capsule */}
         <div className="glass-pill rounded-full py-2 px-3 pr-4 flex items-center gap-3.5 relative glow-hover transition-all duration-300 shadow-2xl">
           {/* Vinyl Disc */}
-          <div
-            onClick={togglePlay}
-            className="relative w-10 h-10 rounded-full vinyl-grooves flex items-center justify-center border border-zinc-700 shadow-inner flex-shrink-0 cursor-pointer group-hover:border-zinc-500 transition-colors"
-            title="Click to toggle play/pause"
-          >
-            <div className={`w-full h-full rounded-full flex items-center justify-center relative ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '3.5s' }}>
-              {/* Center Label Hole & Ambient Glow */}
-              <div className="w-3.5 h-3.5 rounded-full bg-zinc-900 border border-zinc-600 flex items-center justify-center pointer-events-none">
-                <div className={`w-1.5 h-1.5 rounded-full bg-violet-400 transition-all duration-500 ${isPlaying ? 'shadow-[0_0_8px_rgba(167,139,250,0.95)] scale-110' : 'opacity-60'}`} />
-              </div>
-            </div>
+      <div
+        onClick={togglePlay}
+        className="relative w-10 h-10 rounded-full vinyl-grooves flex items-center justify-center border border-zinc-700 flex-shrink-0 cursor-pointer group-hover:border-zinc-500 transition-colors overflow-hidden"
+        title="Click to toggle play/pause"
+      >
+        {/* Rotating grooves + label together */}
+        <div
+          className={`w-full h-full rounded-full flex items-center justify-center relative vinyl-grooves ${isPlaying ? 'vinyl-spin' : ''}`}
+        >
+          {/* Glossy diagonal sheen, rotates with the disc for realism */}
+          <div className="absolute inset-0 rounded-full vinyl-shine pointer-events-none" />
+
+          {/* Center label */}
+          <div className="w-3.5 h-3.5 rounded-full vinyl-label border border-violet-900/50 flex items-center justify-center relative z-10">
+            <div className={`w-1.5 h-1.5 rounded-full bg-zinc-900/80 transition-all duration-500 ${isPlaying ? 'shadow-[0_0_6px_rgba(0,0,0,0.6)]' : 'opacity-70'}`} />
           </div>
+        </div>
+
+        {/* Static outer rim highlight (doesn't spin, sits on top) */}
+        <div className="absolute inset-0 rounded-full pointer-events-none" style={{ boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08)' }} />
+      </div>
 
           {/* Song Meta & Wide Equalizer Waveform */}
           <div className="text-left flex flex-col justify-center pr-2 flex-grow min-w-[170px] sm:min-w-[210px]">
