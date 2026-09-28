@@ -117,7 +117,6 @@ export default function HeroBlobs() {
   return (
     <div className="aurora-bg">
       <div className="nebula-glow-1" />
-      <div className="nebula-glow-2" />
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-70" />
     </div>
   );

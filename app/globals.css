@@ -303,18 +303,6 @@ body {
   will-change: transform;
 }
 
-.nebula-glow-2 {
-  position: absolute;
-  bottom: 25%;
-  right: 10%;
-  width: 550px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, rgba(168, 85, 247, 0.035) 50%, transparent 75%);
-  filter: blur(100px);
-  animation: float 20s ease-in-out infinite alternate-reverse;
-  will-change: transform;
-}
-
 /* Utilities */
 .glass {
   background: var(--glass-bg);
