@@ -39,7 +39,7 @@ export default function HeroBlobs() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       stars = [];
-      const count = Math.min(Math.floor((width * height) / 20000), 75);
+      const count = Math.min(Math.floor((width * height) / 10000), 150);
       for (let i = 0; i < count; i++) {
         stars.push({
           x: Math.random() * width,
