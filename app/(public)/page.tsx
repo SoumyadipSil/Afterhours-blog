@@ -32,12 +32,12 @@ export default function HomePage() {
   };
 
   return (
-    <div className="w-full relative z-10">
+    <div className="w-full relative z-10 flex flex-col">
       {/* Dynamic Aurora & Starfield Background */}
       <HeroBlobs />
 
       {/* 1. Hero Section */}
-      <section className="min-h-[100vh] -mt-20 flex flex-col justify-between items-center pt-32 pb-12 px-6 relative">
+      <section className="order-1 min-h-[100vh] -mt-20 flex flex-col justify-between items-center pt-32 pb-12 px-6 relative">
         <div className="w-full h-4" />
 
         <div className="w-full max-w-3xl mx-auto flex flex-col items-center text-center z-10">
@@ -92,10 +92,9 @@ export default function HomePage() {
       </section>
 
       {/* 2. The 3 AM Shelf Section (Books) */}
-      <section id="shelf" className="max-w-4xl mx-auto px-6 py-16">
+      <section id="shelf" className="order-4 max-w-4xl mx-auto px-6 py-16">
         <ScrollReveal>
           <div className="mb-8">
-            <span className="text-xs font-mono text-zinc-500 tracking-widest uppercase">Atmosphere</span>
             <h2 className="text-xl font-bold text-zinc-200 font-heading">The 3 AM Shelf</h2>
           </div>
 
@@ -176,7 +175,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. Aesthetic Image Gallery Section (Direct Frames) */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
+      <section className="order-3 py-16 px-6 max-w-7xl mx-auto">
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 [column-fill:balance]">
           {GALLERY_IMAGES.map((img, i) => (
             <ScrollReveal key={img.id} delay={i * 80} className="break-inside-avoid mb-6">
@@ -197,11 +196,10 @@ export default function HomePage() {
       </section>
 
       {/* 4. Category Showcase Section (Matches Notion Database Headers: Life & Coding) */}
-      <section className="py-16 px-6 max-w-5xl mx-auto">
+      <section className="order-2 py-16 px-6 max-w-5xl mx-auto">
         <ScrollReveal>
           <div className="mb-8">
-            <span className="text-xs font-mono text-zinc-500 tracking-widest uppercase">Sections</span>
-            <h2 className="text-2xl font-bold text-zinc-200 font-heading">Notion Dispatches</h2>
+            <h2 className="text-2xl font-bold text-zinc-200 font-heading">Blogs</h2>
           </div>
         </ScrollReveal>
         <div className="grid md:grid-cols-2 gap-8">
@@ -248,7 +246,7 @@ export default function HomePage() {
       </section>
 
       {/* 5. About Teaser Strip */}
-      <ScrollReveal delay={100}>
+      <ScrollReveal delay={100} className="order-5">
         <section className="relative py-20 px-6 overflow-hidden">
           <img
             src="https://i.pinimg.com/originals/ca/26/2e/ca262e0354eea311c41134c3e4bc3bc2.gif"
