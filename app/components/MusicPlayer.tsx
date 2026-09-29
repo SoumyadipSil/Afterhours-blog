@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, SkipForward, SkipBack } from 'lucide-react';
+import { Pause, Play, Shuffle, SkipBack, SkipForward, Volume1, Volume2, VolumeX } from 'lucide-react';
 
 const TRACKS = [
   { id: 1, title: 'Addiction (Slowed + Reverb)', artist: 'Night Vibes', src: '/addiction.mp3' },
@@ -12,6 +12,11 @@ const TRACKS = [
 export default function MusicPlayer() {
   const [currentTrack, setCurrentTrack] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const [isVolumeOpen, setIsVolumeOpen] = useState(false);
+  const [isShuffleEnabled, setIsShuffleEnabled] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [toastText, setToastText] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -60,6 +65,12 @@ export default function MusicPlayer() {
     }
   }, [isPlaying, currentTrack]);
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
   // Toast on track change
   const showToast = (text: string) => {
     setToastText(text);
@@ -70,22 +81,67 @@ export default function MusicPlayer() {
 
   const togglePlay = () => setIsPlaying(!isPlaying);
 
+  const formatTime = (time: number) => {
+    if (!Number.isFinite(time)) return '00:00';
+    const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+    const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  };
+
+  const getAdjacentTrack = (direction: 1 | -1) => {
+    if (isShuffleEnabled && TRACKS.length > 1) {
+      let randomIndex = currentTrack;
+      while (randomIndex === currentTrack) {
+        randomIndex = Math.floor(Math.random() * TRACKS.length);
+      }
+      return randomIndex;
+    }
+
+    return (currentTrack + direction + TRACKS.length) % TRACKS.length;
+  };
+
   const nextTrack = () => {
-    setCurrentTrack((prev) => {
-      const nextIndex = (prev + 1) % TRACKS.length;
-      showToast(`Now playing: ${TRACKS[nextIndex].title}`);
-      return nextIndex;
-    });
+    const nextIndex = getAdjacentTrack(1);
+    setCurrentTrack(nextIndex);
+    setCurrentTime(0);
+    showToast(`Now playing: ${TRACKS[nextIndex].title}`);
     if (!isPlaying) setIsPlaying(true);
   };
 
   const prevTrack = () => {
-    setCurrentTrack((prev) => {
-      const prevIndex = (prev - 1 + TRACKS.length) % TRACKS.length;
-      showToast(`Now playing: ${TRACKS[prevIndex].title}`);
-      return prevIndex;
-    });
+    const prevIndex = getAdjacentTrack(-1);
+    setCurrentTrack(prevIndex);
+    setCurrentTime(0);
+    showToast(`Now playing: ${TRACKS[prevIndex].title}`);
     if (!isPlaying) setIsPlaying(true);
+  };
+
+  const toggleShuffle = () => {
+    const shuffleEnabled = !isShuffleEnabled;
+    setIsShuffleEnabled(shuffleEnabled);
+
+    if (shuffleEnabled && TRACKS.length > 1) {
+      let randomIndex = currentTrack;
+      while (randomIndex === currentTrack) {
+        randomIndex = Math.floor(Math.random() * TRACKS.length);
+      }
+      setCurrentTrack(randomIndex);
+      setCurrentTime(0);
+      showToast(`Now playing: ${TRACKS[randomIndex].title}`);
+      if (!isPlaying) setIsPlaying(true);
+    }
+  };
+
+  const seekTrack = (event: React.MouseEvent<HTMLDivElement>) => {
+    const audio = audioRef.current;
+    const trackDuration = audio?.duration || duration;
+    if (!audio || !Number.isFinite(trackDuration) || trackDuration <= 0) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
+    const nextTime = progress * trackDuration;
+    audio.currentTime = nextTime;
+    setCurrentTime(nextTime);
   };
 
   return (
@@ -123,8 +179,6 @@ export default function MusicPlayer() {
                 <div className="absolute w-16 h-16 rounded-full border border-black/80 bg-black/40 pointer-events-none" />
                 <div className="relative z-10 w-14 h-14 sm:w-16 sm:h-16 rounded-full vinyl-label border border-violet-300/30 flex flex-col items-center justify-center text-center shadow-inner p-1">
                   <span className="text-[8px] font-semibold tracking-tight text-white leading-tight">AfterHours</span>
-                  <span className="text-[6px] text-violet-100/80 tracking-wider uppercase">33⅓ RPM</span>
-                  <span className="text-[6px] text-white/60 tracking-widest uppercase">Stereo</span>
                   <div className="w-2.5 h-2.5 rounded-full bg-zinc-950 border border-zinc-500 shadow-inner mt-0.5 flex items-center justify-center">
                     <div className="w-1 h-1 rounded-full bg-zinc-300" />
                   </div>
@@ -154,19 +208,13 @@ export default function MusicPlayer() {
                 </div>
               </div>
 
-              <div className="absolute bottom-1 left-1 flex items-center gap-1.5 bg-[#0e0e10]/80 px-2 py-0.5 rounded-full border border-white/5">
-                <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isPlaying ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-zinc-600'}`} />
-                <span className="text-[8px] text-zinc-500 uppercase tracking-wider">33 RPM</span>
-              </div>
             </div>
 
             <div className="w-full min-w-0 flex-1 text-left">
               <div className="flex items-center justify-between pb-2 border-b border-white/[0.07]">
                 <div className="flex items-center gap-2 min-w-0">
                   <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isPlaying ? 'bg-violet-300 shadow-[0_0_8px_rgba(221,183,255,0.8)]' : 'bg-zinc-600'}`} />
-                  <span className="text-[9px] text-zinc-500 tracking-wider uppercase truncate">
-                    {isPlaying ? 'Cue engaged · 33⅓ RPM playing' : 'Turntable standby · needle rested'}
-                  </span>
+                  <span className="text-[9px] text-zinc-500 tracking-wider uppercase truncate">{isPlaying ? 'Playing' : 'Paused'}</span>
                 </div>
                 <div className={`flex items-end gap-[3px] h-5 ml-2 flex-shrink-0 ${isPlaying ? 'eq-playing' : 'eq-paused'}`} title={isPlaying ? 'Playing' : 'Paused'}>
                   {bars.slice(0, 5).map((height, index) => (
@@ -181,32 +229,58 @@ export default function MusicPlayer() {
                 </div>
                 <div className="flex items-center gap-2 mt-1 text-[10px] text-zinc-500">
                   <span>{TRACKS[currentTrack].artist}</span>
-                  <span className="text-zinc-700">•</span>
-                  <span className="truncate">Master stereo cut · vinyl press</span>
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <div className="w-full h-1.5 rounded-full bg-[#2a2a2c] overflow-hidden">
-                  <div className={`h-full rounded-full bg-gradient-to-r from-violet-300 to-sky-300 transition-all duration-300 ${isPlaying ? 'w-2/5' : 'w-1/3'}`} />
+                <div onClick={seekTrack} className="w-full h-1.5 rounded-full bg-[#2a2a2c] overflow-hidden cursor-pointer" role="slider" aria-label="Seek through track" aria-valuemin={0} aria-valuemax={duration || 0} aria-valuenow={currentTime} tabIndex={0}>
+                  <div className="h-full rounded-full bg-gradient-to-r from-violet-300 to-sky-300 transition-[width] duration-100" style={{ width: duration > 0 ? `${(currentTime / duration) * 100}%` : '0%' }} />
                 </div>
                 <div className="flex items-center justify-between text-[9px] text-zinc-600 font-mono">
-                  <span>01:14</span>
-                  <span className="text-violet-300/60">Late night lo-fi session</span>
-                  <span>03:48</span>
+                  <span>{formatTime(currentTime)}</span>
+                  <span>{formatTime(duration)}</span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 mt-1">
-                <button onClick={prevTrack} aria-label="Previous Track" className="w-8 h-8 rounded-full bg-[#13131a] hover:bg-[#2a2a2c] text-zinc-400 hover:text-zinc-100 flex items-center justify-center transition-all active:scale-95" title="Previous Track">
-                  <SkipBack className="w-4 h-4 fill-current" />
-                </button>
-                <button onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'} className="w-10 h-10 rounded-full bg-zinc-100 text-black flex items-center justify-center shadow-[0_0_20px_rgba(221,183,255,0.35)] hover:scale-105 active:scale-95 transition-all" title={isPlaying ? 'Pause' : 'Play'}>
-                  {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
-                </button>
-                <button onClick={nextTrack} aria-label="Next Track" className="w-8 h-8 rounded-full bg-[#13131a] hover:bg-[#2a2a2c] text-zinc-400 hover:text-zinc-100 flex items-center justify-center transition-all active:scale-95" title="Next Track">
-                  <SkipForward className="w-4 h-4 fill-current" />
-                </button>
+              <div className="flex items-center justify-between gap-2 pt-3 mt-1">
+                <div className="flex items-center gap-2 min-w-0 text-zinc-400">
+                  <button
+                    onClick={() => setIsVolumeOpen((open) => !open)}
+                    aria-label="Adjust volume"
+                    aria-expanded={isVolumeOpen}
+                    className="w-8 h-8 rounded-full bg-[#13131a] hover:bg-[#2a2a2c] hover:text-zinc-100 flex items-center justify-center transition-all active:scale-95"
+                    title="Adjust volume"
+                  >
+                    {volume === 0 ? <VolumeX className="w-3.5 h-3.5" /> : volume < 0.5 ? <Volume1 className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                  </button>
+                  {isVolumeOpen && (
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      value={volume}
+                      onChange={(event) => setVolume(Number(event.target.value))}
+                      aria-label="Volume"
+                      className="w-16 sm:w-20 accent-violet-300 cursor-pointer"
+                    />
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button onClick={prevTrack} aria-label="Previous Track" className="w-8 h-8 rounded-full bg-[#13131a] hover:bg-[#2a2a2c] text-zinc-400 hover:text-zinc-100 flex items-center justify-center transition-all active:scale-95" title="Previous Track">
+                    <SkipBack className="w-4 h-4 fill-current" />
+                  </button>
+                  <button onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'} className="w-10 h-10 rounded-full bg-zinc-100 text-black flex items-center justify-center shadow-[0_0_20px_rgba(221,183,255,0.35)] hover:scale-105 active:scale-95 transition-all" title={isPlaying ? 'Pause' : 'Play'}>
+                    {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
+                  </button>
+                  <button onClick={nextTrack} aria-label="Next Track" className="w-8 h-8 rounded-full bg-[#13131a] hover:bg-[#2a2a2c] text-zinc-400 hover:text-zinc-100 flex items-center justify-center transition-all active:scale-95" title="Next Track">
+                    <SkipForward className="w-4 h-4 fill-current" />
+                  </button>
+                  <button onClick={toggleShuffle} aria-label={isShuffleEnabled ? 'Disable shuffle' : 'Shuffle'} className={`w-8 h-8 rounded-full bg-[#13131a] hover:bg-[#2a2a2c] flex items-center justify-center transition-all active:scale-95 ${isShuffleEnabled ? 'text-violet-300' : 'text-zinc-400 hover:text-zinc-100'}`} title={isShuffleEnabled ? 'Disable shuffle' : 'Shuffle'}>
+                    <Shuffle className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -215,6 +289,8 @@ export default function MusicPlayer() {
         <audio
           ref={audioRef}
           src={TRACKS[currentTrack].src}
+          onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
+          onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
           onEnded={nextTrack}
           preload="metadata"
         />

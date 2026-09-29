@@ -7,14 +7,14 @@ import ScrollReveal from '@/app/components/ScrollReveal';
 import MusicPlayer from '@/app/components/MusicPlayer';
 import { ArrowRight, BookOpen } from 'lucide-react';
 
-const GALLERY_IMAGES = [
-  { id: '1', caption: "City Lights", height: "h-80", src: "https://i.pinimg.com/1200x/e0/4a/08/e04a086bb6bcc1b538b64a7acde732d5.jpg" },
-  { id: '2', caption: "Midnight Reflections", height: "h-96", src: "https://i.pinimg.com/736x/cf/9b/8a/cf9b8a080b02d3f90fb12f48c65e6cac.jpg" },
-  { id: '3', caption: "Code & Coffee", height: "h-64", src: "https://i.pinimg.com/736x/7d/d1/66/7dd166fe4b870af0d53788c94917e206.jpg" },
-  { id: '4', caption: "Quiet Hours", height: "h-80", src: "https://i.pinimg.com/originals/3b/eb/ab/3bebabd610da8b865e4af3ca067a7ac5.gif" },
-  { id: '5', caption: "Neon Thoughts", height: "h-96", src: "https://i.pinimg.com/originals/00/fb/63/00fb631deaf0ccf5ed23558c9367ef5d.gif" },
-  { id: '6', caption: "Dawn Approaches", height: "h-80", src: "https://i.pinimg.com/1200x/ee/fc/f7/eefcf77657341a50246c3b5089ec19e9.jpg" },
-];
+  const GALLERY_IMAGES = [
+    { id: '1',  height: "h-80", src: "https://i.pinimg.com/1200x/e0/4a/08/e04a086bb6bcc1b538b64a7acde732d5.jpg" },
+    { id: '2',  height: "h-96", src: "https://i.pinimg.com/736x/cf/9b/8a/cf9b8a080b02d3f90fb12f48c65e6cac.jpg" },
+    { id: '3',  height: "h-64", src: "https://i.pinimg.com/736x/7d/d1/66/7dd166fe4b870af0d53788c94917e206.jpg" },
+    { id: '4',  height: "h-80", src: "https://i.pinimg.com/originals/3b/eb/ab/3bebabd610da8b865e4af3ca067a7ac5.gif" },
+    { id: '5',  height: "h-96", src: "https://i.pinimg.com/originals/00/fb/63/00fb631deaf0ccf5ed23558c9367ef5d.gif" },
+    { id: '6',  height: "h-80", src: "https://i.pinimg.com/1200x/ee/fc/f7/eefcf77657341a50246c3b5089ec19e9.jpg" },
+  ];
 
 export default function HomePage() {
   const [expandedShelf, setExpandedShelf] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export default function HomePage() {
         <div className="w-full max-w-3xl mx-auto flex flex-col items-center text-center z-10">
           {/* Main Title Header */}
           <div className="space-y-3 pt-2">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white font-sans drop-shadow-sm animate-fade-in opacity-0">
+            <h1 className="text-7xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white font-sans drop-shadow-sm animate-fade-in opacity-0">
               AfterHours
             </h1>
             <p className="font-mono text-xs sm:text-sm text-zinc-500 tracking-wider animate-fade-in opacity-0" style={{ animationDelay: '0.15s' }}>
