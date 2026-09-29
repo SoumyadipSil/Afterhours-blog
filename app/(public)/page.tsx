@@ -41,9 +41,6 @@ export default function HomePage() {
         <div className="w-full h-4" />
 
         <div className="w-full max-w-3xl mx-auto flex flex-col items-center text-center z-10">
-          {/* Refined Music Widget */}
-          <MusicPlayer />
-
           {/* Main Title Header */}
           <div className="space-y-3 pt-2">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white font-sans drop-shadow-sm animate-fade-in opacity-0">
@@ -74,6 +71,11 @@ export default function HomePage() {
             >
               About the Author
             </Link>
+          </div>
+
+          {/* Refined Music Widget */}
+          <div className="w-full pt-12">
+            <MusicPlayer />
           </div>
         </div>
 
