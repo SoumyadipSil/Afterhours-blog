@@ -43,7 +43,7 @@ export default function HomePage() {
         <div className="w-full max-w-3xl mx-auto flex flex-col items-center text-center z-10">
           {/* Main Title Header */}
           <div className="space-y-3 pt-2">
-            <h1 className="text-7xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white font-sans drop-shadow-sm animate-fade-in opacity-0">
+            <h1 className="text-7xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white font-heading drop-shadow-sm animate-fade-in opacity-0">
               AfterHours
             </h1>
             <p className="font-mono text-xs sm:text-sm text-zinc-500 tracking-wider animate-fade-in opacity-0" style={{ animationDelay: '0.15s' }}>
