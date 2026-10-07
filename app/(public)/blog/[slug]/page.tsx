@@ -4,6 +4,50 @@ import Link from 'next/link';
 import ReadingProgress from '@/app/components/ReadingProgress';
 import NotionPageRenderer from '@/app/components/NotionPageRenderer';
 
+const WORDS_PER_MINUTE = 200;
+
+function countWords(value: unknown): number {
+  if (typeof value === 'string') {
+    return value.trim().split(/\s+/).filter(Boolean).length;
+  }
+
+  if (Array.isArray(value)) {
+    return value.reduce((total, item) => total + countWords(item), 0);
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.values(value).reduce((total, item) => total + countWords(item), 0);
+  }
+
+  return 0;
+}
+
+function calculateReadingTime(recordMap: unknown): number {
+  if (!recordMap || typeof recordMap !== 'object' || !('block' in recordMap)) {
+    return 1;
+  }
+
+  const blocks = recordMap.block;
+  if (!blocks || typeof blocks !== 'object') {
+    return 1;
+  }
+
+  const wordCount = Object.values(blocks).reduce((total, block) => {
+    if (!block || typeof block !== 'object' || !('value' in block)) {
+      return total;
+    }
+
+    const blockValue = block.value;
+    if (!blockValue || typeof blockValue !== 'object' || !('properties' in blockValue)) {
+      return total;
+    }
+
+    return total + countWords(blockValue.properties);
+  }, 0);
+
+  return Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
+}
+
 export default async function PostPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
   const { slug } = params;
@@ -16,7 +60,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
 
   const { postMetadata: post, recordMap } = data;
 
-  const readingTime = 5; // Can estimate this based on blocks later
+  const readingTime = calculateReadingTime(recordMap);
 
   const isCoding = post.category?.toLowerCase() === 'coding';
   const gradientClass = isCoding
