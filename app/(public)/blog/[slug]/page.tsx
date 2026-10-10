@@ -58,7 +58,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
     notFound();
   }
 
-  const { postMetadata: post, recordMap } = data;
+  const { postMetadata: post, recordMap, markdown } = data;
 
   const readingTime = calculateReadingTime(recordMap);
 
@@ -109,7 +109,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
         {/* Content Section */}
         <div className="max-w-3xl mx-auto px-6 mt-16">
           <div className="prose prose-invert prose-amber max-w-none prose-headings:font-heading prose-a:text-accent-amber hover:prose-a:text-glow-amber transition-colors">
-            <NotionPageRenderer recordMap={recordMap} />
+            <NotionPageRenderer markdown={markdown} />
           </div>
 
           {/* Footer Navigation */}

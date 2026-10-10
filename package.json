@@ -13,6 +13,7 @@
     "@supabase/ssr": "^0.12.4",
     "@supabase/supabase-js": "^2.112.0",
     "dotenv": "^17.4.2",
+    "highlight.js": "^11.12.0",
     "lucide-react": "^1.37.0",
     "next": "16.2.12",
     "notion-client": "^8.0.6",
@@ -20,7 +21,8 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
-    "react-notion-x": "^8.0.6"
+    "react-notion-x": "^8.0.6",
+    "rehype-highlight": "^7.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

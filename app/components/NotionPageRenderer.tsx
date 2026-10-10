@@ -1,23 +1,18 @@
 'use client';
-import { NotionRenderer } from 'react-notion-x';
-import 'react-notion-x/src/styles.css';
-
-// Optionally, you can import additional CSS for specific blocks:
-// import 'prismjs/themes/prism-tomorrow.css' // for code blocks
-// import 'katex/dist/katex.min.css' // for math
+import ReactMarkdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github-dark.css';
 
 interface NotionPageRendererProps {
-  recordMap: any;
+  markdown: string;
 }
 
-export default function NotionPageRenderer({ recordMap }: NotionPageRendererProps) {
+export default function NotionPageRenderer({ markdown }: NotionPageRendererProps) {
   return (
-    <div className="notion-custom-theme">
-      <NotionRenderer 
-        recordMap={recordMap} 
-        fullPage={false} 
-        darkMode={true} 
-      />
+    <div className="notion-custom-theme markdown-body">
+      <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+        {markdown}
+      </ReactMarkdown>
     </div>
   );
 }

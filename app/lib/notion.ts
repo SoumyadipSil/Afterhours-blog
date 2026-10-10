@@ -1,13 +1,15 @@
 import { Client } from '@notionhq/client';
 import { NotionAPI } from 'notion-client';
+import { NotionToMarkdown } from 'notion-to-md';
 
 // Official Notion Client (used for querying databases)
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-// Unofficial Notion Client (used by react-notion-x to fetch full page content)
+// Unofficial Notion Client used to fetch the page record map for metadata such as reading time.
 export const notionApi = new NotionAPI();
+const notionToMarkdown = new NotionToMarkdown({ notionClient: notion });
 
 export const DATABASE_ID = process.env.NOTION_DATABASE_ID!;
 
@@ -123,10 +125,13 @@ export async function getPostBySlug(slug: string) {
     
     // Fetch the actual page blocks for rendering
     const recordMap = await notionApi.getPage(page.id);
+    const markdownBlocks = await notionToMarkdown.pageToMarkdown(page.id);
+    const markdown = notionToMarkdown.toMarkdownString(markdownBlocks).parent;
 
     return {
       postMetadata,
       recordMap,
+      markdown,
     };
   } catch (error) {
     console.error('Error fetching post by slug:', error);

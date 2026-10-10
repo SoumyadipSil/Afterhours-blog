@@ -444,6 +444,7 @@ body {
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
+  white-space: pre;
   border: 1px solid var(--border);
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -454,4 +455,9 @@ body {
   padding: 0;
   border-radius: 0;
   color: inherit;
+}
+
+.prose pre code.hljs {
+  background: transparent;
+  color: var(--text-primary);
 }
