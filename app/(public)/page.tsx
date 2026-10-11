@@ -213,7 +213,7 @@ export default function HomePage() {
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-violet-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-transform group-hover:scale-125" />
               <div className="relative z-10">
-                <span className="text-violet-400 font-mono text-xs uppercase tracking-wider mb-4 block">01 · Personal Essays</span>
+                
                 <h3 className="font-heading text-3xl sm:text-4xl text-white mb-3">Life</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-6">
                   Reflections on existence, society, and the human condition. Solitary essays and thoughts that only surface at 3 AM.
@@ -233,7 +233,7 @@ export default function HomePage() {
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-transform group-hover:scale-125" />
               <div className="relative z-10">
-                <span className="text-indigo-400 font-mono text-xs uppercase tracking-wider mb-4 block">02 · Engineering</span>
+              
                 <h3 className="font-heading text-3xl sm:text-4xl text-white mb-3">Coding</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-6">
                   Technical write-ups, architecture notes, and late-night experiments with autonomous agents, LLMs, and modern frameworks.
