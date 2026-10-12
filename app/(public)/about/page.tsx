@@ -4,7 +4,8 @@ export default function AboutPage() {
   const interests = [
     "Software Engineering", "Late Night Coding", "Cinematic Photography",
     "UI/UX Design", "Creative Writing", "AI Experiments",
-    "Minimalism", "Mechanical Keyboards"
+    "Minimalism", "Mechanical Keyboards" , "IEMs",
+    "Arch btw" , "Soulslike Games" , 
   ];
 
   return (
@@ -24,7 +25,7 @@ export default function AboutPage() {
               <h2 className="text-3xl text-text-primary mb-6">Hello, I&apos;m Soumyadip</h2>
               {/* Write your own bio here */}
               <p className="text-text-secondary leading-relaxed mb-8">
-                ...
+                I'm a software grad with a passion for creating innovative solutions and exploring modern technologies. Love the late night exploring new ideas with my laptop.
               </p>
 
               <h3 className="text-xl text-text-primary mb-4 font-heading">Interests &amp; Focus</h3>
