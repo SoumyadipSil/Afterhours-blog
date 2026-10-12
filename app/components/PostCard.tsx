@@ -7,9 +7,10 @@ interface PostCardProps {
   date: string;
   category: string;
   coverImage?: string;
+  readingTime?: number;
 }
 
-export default function PostCard({ title, slug, excerpt, date, category, coverImage }: PostCardProps) {
+export default function PostCard({ title, slug, excerpt, date, category, coverImage, readingTime }: PostCardProps) {
   const isCoding = category.toLowerCase() === 'coding';
   const gradientClass = isCoding
     ? 'from-accent-slate/20 to-bg-elevated'
@@ -32,6 +33,7 @@ export default function PostCard({ title, slug, excerpt, date, category, coverIm
             {category}
           </span>
           <span className="text-xs text-text-tertiary">{date}</span>
+          {readingTime && <span className="text-xs text-text-tertiary">{readingTime} min read</span>}
         </div>
         <h3 className="font-heading text-xl font-semibold text-text-primary mb-2 line-clamp-2">
           {title}

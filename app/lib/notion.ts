@@ -21,6 +21,9 @@ export interface BlogPost {
   published_at: string;
   category: string;
   cover_image: string | null;
+  content: string;
+  reading_time: number;
+  tags: string[];
 }
 
 /**
@@ -34,6 +37,11 @@ function mapNotionPropertiesToPost(page: any): BlogPost {
   const getTitle = (prop: any) => prop?.title?.[0]?.plain_text || 'Untitled';
   const getSelect = (prop: any) => prop?.select?.name || 'General';
   const getDate = (prop: any) => prop?.date?.start || page.created_time;
+  const getMultiSelect = (prop: unknown): string[] => {
+    if (!prop || typeof prop !== 'object' || !('multi_select' in prop)) return [];
+    const multiSelect = (prop as { multi_select?: Array<{ name?: string }> }).multi_select;
+    return multiSelect?.flatMap((item) => item.name ? [item.name] : []) || [];
+  };
   
   // Extract cover image if present
   let coverImage = null;
@@ -53,7 +61,31 @@ function mapNotionPropertiesToPost(page: any): BlogPost {
     published_at: getDate(properties.Date || properties.Published),
     category: getSelect(properties.Category),
     cover_image: coverImage,
+    content: '',
+    reading_time: 1,
+    tags: getMultiSelect(properties.Tags || properties.Tag),
   };
+}
+
+function getReadingTime(content: string): number {
+  const wordCount = content.trim() ? content.trim().split(/\s+/).length : 0;
+  return Math.max(1, Math.ceil(wordCount / 200));
+}
+
+async function enrichPost(post: BlogPost): Promise<BlogPost> {
+  try {
+    const markdownBlocks = await notionToMarkdown.pageToMarkdown(post.id);
+    const content = notionToMarkdown.toMarkdownString(markdownBlocks).parent;
+
+    return {
+      ...post,
+      content,
+      reading_time: getReadingTime(content),
+    };
+  } catch (error) {
+    console.error(`Error fetching Notion content for post ${post.id}:`, error);
+    return post;
+  }
 }
 
 /**
@@ -94,7 +126,8 @@ export async function getAllPublishedPosts(category?: string): Promise<BlogPost[
       ],
     });
 
-    return response.results.map(mapNotionPropertiesToPost);
+    const posts = response.results.map(mapNotionPropertiesToPost);
+    return Promise.all(posts.map(enrichPost));
   } catch (error) {
     console.error('Error fetching posts from Notion:', error);
     return [];
