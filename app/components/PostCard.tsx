@@ -30,12 +30,16 @@ export default function PostCard({ title, slug, excerpt, date, category, coverIm
   return (
     <Link href={`/blog/${slug}`} className="block glow-card rounded-xl overflow-hidden group">
       <div className={`h-48 w-full relative overflow-hidden bg-gradient-to-br ${gradientClass}`}>
-        {coverImage && (
+        {coverImage ? (
           <img 
             src={coverImage} 
             alt={title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center opacity-25 group-hover:opacity-40 transition-opacity">
+            <span className="text-2xl font-mono text-text-tertiary">✦</span>
+          </div>
         )}
       </div>
       <div className="p-6">

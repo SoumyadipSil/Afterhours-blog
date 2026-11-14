@@ -43,14 +43,34 @@ function mapNotionPropertiesToPost(page: any): BlogPost {
     return multiSelect?.flatMap((item) => item.name ? [item.name] : []) || [];
   };
   
+  // Helper to extract image from a property (Files & Media or URL)
+  const getPropertyImage = (prop: any): string | null => {
+    if (!prop) return null;
+    if (prop.type === 'url' && prop.url) return prop.url;
+    if (prop.type === 'files' && Array.isArray(prop.files) && prop.files.length > 0) {
+      const file = prop.files[0];
+      return file.file?.url || file.external?.url || null;
+    }
+    return null;
+  };
+
   // Extract cover image if present
-  let coverImage = null;
+  let coverImage: string | null = null;
   if (page.cover) {
     if (page.cover.type === 'external') {
       coverImage = page.cover.external.url;
     } else if (page.cover.type === 'file') {
       coverImage = page.cover.file.url;
     }
+  }
+
+  // Fallback to database column properties if page.cover is not set
+  if (!coverImage) {
+    coverImage =
+      getPropertyImage(properties.Cover) ||
+      getPropertyImage(properties['Cover Image']) ||
+      getPropertyImage(properties.Image) ||
+      getPropertyImage(properties.Thumbnail);
   }
 
   return {
