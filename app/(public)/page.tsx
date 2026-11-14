@@ -197,14 +197,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. Category Showcase Section (Matches Notion Database Headers: Life & Coding) */}
-      <section className="order-2 py-16 px-6 max-w-5xl mx-auto">
+      {/* 4. Category Showcase Section (Matches Notion Database Headers: Life, Coding & Reviews) */}
+      <section className="order-2 py-16 px-6 max-w-6xl mx-auto">
         <ScrollReveal>
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-zinc-200 font-heading">Blogs</h2>
           </div>
         </ScrollReveal>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <ScrollReveal delay={0}>
             <Link
               href="/blog?category=life"
@@ -213,7 +213,6 @@ export default function HomePage() {
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-violet-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-transform group-hover:scale-125" />
               <div className="relative z-10">
-                
                 <h3 className="font-heading text-3xl sm:text-4xl text-white mb-3">Life</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-6">
                   Reflections on existence, society, and the human condition. Solitary essays and thoughts that only surface at 3 AM.
@@ -233,13 +232,31 @@ export default function HomePage() {
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-transform group-hover:scale-125" />
               <div className="relative z-10">
-              
                 <h3 className="font-heading text-3xl sm:text-4xl text-white mb-3">Coding</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-6">
                   Technical write-ups, architecture notes, and late-night experiments with autonomous agents, LLMs, and modern frameworks.
                 </p>
                 <span className="text-zinc-200 text-xs font-mono font-medium flex items-center gap-2 group-hover:text-indigo-300 group-hover:gap-3 transition-all">
                   View Projects <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </Link>
+          </ScrollReveal>
+
+          <ScrollReveal delay={300}>
+            <Link
+              href="/reviews"
+              onMouseMove={handleMouseMove}
+              className="spotlight-card block relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/20 p-8 sm:p-10 h-full group hover:border-zinc-700/80 transition-all shadow-xl"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-transform group-hover:scale-125" />
+              <div className="relative z-10">
+                <h3 className="font-heading text-3xl sm:text-4xl text-white mb-3">Reviews</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                  Critical dissections, book commentaries, and late-night impressions on cinema, software, and creative craft.
+                </p>
+                <span className="text-zinc-200 text-xs font-mono font-medium flex items-center gap-2 group-hover:text-rose-300 group-hover:gap-3 transition-all">
+                  Read Reviews <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>
             </Link>

@@ -11,10 +11,21 @@ interface PostCardProps {
 }
 
 export default function PostCard({ title, slug, excerpt, date, category, coverImage, readingTime }: PostCardProps) {
-  const isCoding = category.toLowerCase() === 'coding';
+  const normalizedCategory = category.toLowerCase();
+  const isCoding = normalizedCategory === 'coding';
+  const isReview = normalizedCategory.includes('review');
+
   const gradientClass = isCoding
     ? 'from-accent-slate/20 to-bg-elevated'
+    : isReview
+    ? 'from-rose-500/20 to-bg-elevated'
     : 'from-accent-amber-muted/20 to-bg-elevated';
+
+  const badgeColorClass = isReview
+    ? 'text-rose-400 bg-rose-500/10 border border-rose-500/20'
+    : isCoding
+    ? 'text-accent-slate bg-accent-slate/10'
+    : 'text-accent-amber bg-accent-amber/10';
 
   return (
     <Link href={`/blog/${slug}`} className="block glow-card rounded-xl overflow-hidden group">
@@ -29,7 +40,7 @@ export default function PostCard({ title, slug, excerpt, date, category, coverIm
       </div>
       <div className="p-6">
         <div className="flex items-center gap-3 mb-3">
-          <span className="text-xs font-medium text-accent-amber bg-accent-amber/10 px-2.5 py-1 rounded-full">
+          <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${badgeColorClass}`}>
             {category}
           </span>
           <span className="text-xs text-text-tertiary">{date}</span>
