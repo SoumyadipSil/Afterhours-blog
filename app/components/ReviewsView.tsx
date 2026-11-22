@@ -108,7 +108,7 @@ export default function ReviewsView({ posts }: ReviewsViewProps) {
             </div>
 
             <h3 className="font-heading text-2xl text-white mb-3">
-              The Critique Ledger is Quiet
+              No Reviews Yet
             </h3>
 
             <p className="text-zinc-400 text-sm leading-relaxed max-w-md mx-auto mb-8">

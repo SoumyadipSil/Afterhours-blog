@@ -21,9 +21,6 @@ export default async function ReviewsPage() {
     <main className="mx-auto max-w-7xl px-6 py-24 min-h-[80vh]">
       {/* Header */}
       <div className="max-w-3xl mb-16 animate-fade-in opacity-0">
-        <span className="text-xs font-mono text-rose-400 uppercase tracking-widest block mb-3">
-          ✦ The Critique Ledger
-        </span>
         <h1 className="font-heading text-5xl md:text-7xl text-white tracking-tight mb-4">
           Reviews
         </h1>
