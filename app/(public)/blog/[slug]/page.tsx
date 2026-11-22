@@ -77,12 +77,12 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
             <div className="absolute inset-0 z-0 flex items-center justify-center bg-bg-primary">
               {/* Blurred Background */}
               <div className="absolute inset-0 z-0">
-                <img src={post.cover_image} alt="" className="w-full h-full object-cover opacity-30 blur-2xl scale-110" />
+                <img src={post.cover_image} alt="" referrerPolicy="no-referrer" className="w-full h-full object-cover opacity-30 blur-2xl scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/80 to-transparent" />
               </div>
               {/* Centered Image */}
               <div className="relative z-10 w-full max-w-4xl px-6 aspect-video mt-20">
-                <img src={post.cover_image} alt={post.title} className="w-full h-full object-cover rounded-xl border border-border shadow-2xl" />
+                <img src={post.cover_image} alt={post.title} referrerPolicy="no-referrer" className="w-full h-full object-cover rounded-xl border border-border shadow-2xl" />
               </div>
             </div>
           ) : (

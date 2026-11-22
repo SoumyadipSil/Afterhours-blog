@@ -60,17 +60,27 @@ function mapNotionPropertiesToPost(page: any): BlogPost {
     if (page.cover.type === 'external') {
       coverImage = page.cover.external.url;
     } else if (page.cover.type === 'file') {
-      coverImage = page.cover.file.url;
+      // Notion S3 signed URLs expire after 1 hour, causing 403 on first load.
+      // Route through our auto-refreshing proxy endpoint so it loads reliably without page refresh.
+      coverImage = `/api/notion-image?id=${page.id}`;
     }
   }
 
   // Fallback to database column properties if page.cover is not set
   if (!coverImage) {
-    coverImage =
+    const propImg =
       getPropertyImage(properties.Cover) ||
       getPropertyImage(properties['Cover Image']) ||
       getPropertyImage(properties.Image) ||
       getPropertyImage(properties.Thumbnail);
+
+    if (propImg) {
+      if (propImg.includes('amazonaws.com') || propImg.includes('notion-static.com')) {
+        coverImage = `/api/notion-image?id=${page.id}`;
+      } else {
+        coverImage = propImg;
+      }
+    }
   }
 
   return {

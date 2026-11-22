@@ -34,6 +34,7 @@ export default function PostCard({ title, slug, excerpt, date, category, coverIm
           <img 
             src={coverImage} 
             alt={title}
+            referrerPolicy="no-referrer"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         )}
